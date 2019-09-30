@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="info"></div>
+    <div id="news"></div>
+    <input type="text" id='title' value='title'>
+    <input type="text" id='short_content'value='short_content' >
+    <input type="text" id="full_content" value="full_content">
+    <input type="text" id="category" value="category">
+    
+    <button id="click">Click me</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('#click').on('click', function(){
+            var d ={};
+            d.title =$('#title').val()
+            d.short_content =$('#short_content').val()
+            d.full_content =$('#full_content').val()
+            d.category =$('#category').val()
+            alert(d.category)
+            $.ajax({
+                url: '/a/xeberler/',
+                method: 'POST',
+                data:d,
+                headers: {
+                    'Authorization': 'Token 6763b3bbb91875abe08205916d868eaf8137752c'
+                },
+                success:function(data){
+                    alert(data)
+
+                },failure:function (errMSg){
+                    alert(errMSg)
+                }
+                
+            }).done(function(response) {
+
+                // let count = response.count
+                // let next_page = response.next
+                // let prev_page = response.previous
+                // let results = response.results
+                // $('#info').append('<p>Count: ' + count + '</p>')
+                // $('#info').append('<p>Next page: ' + next_page + '</p>')
+                // $('#info').append('<p>Previous page: ' + prev_page + '</p>')
+                // $('#news').empty()
+                // for (let i in results) {
+                //     $('#news').append('<p>' + results[i].title + '</p>')
+                // }         
+            }).catch(function(error){
+                // $('#news').html('<h1>' + error.responseJSON.detail + '</h1>')
+                console.log(error)
+            })
+        })
+    </script>
+</body>
+</html>
